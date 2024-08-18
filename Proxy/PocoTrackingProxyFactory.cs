@@ -8,15 +8,12 @@ namespace PocoTracking.Proxy
     {
         private static ConcurrentDictionary<Type, Type> _proxyTypes = new();
 
-        public static T CreateProxyInstance<T>(this T instance, Action<T, string> trackingAction, bool overwrite = false)
+        public static T CreateProxyInstance<T>(this T instance, Action<T, string> trackingAction)
             where T : class, new()
         {
             var type = typeof(T);
-
             var proxyType = PocoTrackingProxyFactory.CreateProxyType<T>();
-
             var proxyInstance = Activator.CreateInstance(proxyType, instance, trackingAction);
-
             return (proxyInstance as T)!;
         }
 
