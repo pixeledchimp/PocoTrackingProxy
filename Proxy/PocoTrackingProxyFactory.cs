@@ -121,24 +121,9 @@ namespace PocoTracking.Proxy
 
             CallBaseClassConstructor(type, ilGenerator);
             StoreParametersInFields(type, ilGenerator, instanceField, actionField);
-            //SetPropertiesFromThePassedInstance(type, ilGenerator);
 
             ilGenerator.Emit(OpCodes.Ret);
         }
-
-        //private static void SetPropertiesFromThePassedInstance(Type type, ILGenerator ilGenerator)
-        //{
-        //    foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-        //    {
-        //        if (property.CanWrite)
-        //        {
-        //            ilGenerator.Emit(OpCodes.Ldarg_0);
-        //            ilGenerator.Emit(OpCodes.Ldarg_1);
-        //            ilGenerator.Emit(OpCodes.Callvirt, property.GetGetMethod()!);
-        //            ilGenerator.Emit(OpCodes.Callvirt, property.GetSetMethod()!);
-        //        }
-        //    }
-        //}
 
         private static void StoreParametersInFields(Type type, ILGenerator ilGenerator, FieldBuilder instanceField, FieldBuilder actionField)
         {
