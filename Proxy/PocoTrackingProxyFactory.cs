@@ -13,23 +13,28 @@ namespace PocoTracking.Proxy
         {
             var type = typeof(T);
 
-            if (!_proxyTypes.TryGetValue(type, out var proxyType) || overwrite)
-            {
-                proxyType = PocoTrackingProxyFactory.CreateProxyType<T>();
-                _proxyTypes[type] = proxyType;
-            }
+            var proxyType = PocoTrackingProxyFactory.CreateProxyType<T>();
+
             var proxyInstance = Activator.CreateInstance(proxyType, instance, trackingAction);
 
             return (proxyInstance as T)!;
         }
 
-        private static Type CreateProxyType<T>() where T : new()
+        public static Type CreateProxyType<T>() where T : new()
         {
             var type = typeof(T);
+
+            if (_proxyTypes.TryGetValue(type, out var proxyType))
+            {
+                return proxyType;
+            }
+
             var typeName = type.Name;
             var trackingProxyAssembly = CreateTrackingProxyAssembly(typeName);
             var moduleBuilder = CreateModule(trackingProxyAssembly, typeName);
-            return CreateProxyType(moduleBuilder, typeName, type);
+            proxyType = CreateProxyType(moduleBuilder, typeName, type);
+            _proxyTypes[type] = proxyType;
+            return proxyType;
         }
 
         private static Type CreateProxyType(ModuleBuilder moduleBuilder, string typeName, Type proxyParentClass)

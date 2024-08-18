@@ -68,3 +68,13 @@ dynamic proxy = person.CreateProxyInstance((p, propertyName) => {
 });
 
 ```
+
+Once a Type as been proxied, it will be cached and reused for future calls to CreateProxyInstance. This means that the same proxy Type will be used for the same object type. Nevertheless, the callback will be different for each proxy instance.
+
+# PocoTrackingProxyFactory.CreateProxyType<T>
+
+You can cache the proxy type and create instances of it later. This can be useful if you want to create multiple instances of the same proxy type.
+
+```csharp
+var _ = PocoTrackingProxyFactory.CreateProxyType<Person>();
+```
