@@ -13,8 +13,8 @@ You can create a proxy instance of this class like this:
 ```csharp
 var person = new Person
 {
-	Name = "John"
-	, Age = 30
+	Name = "John",
+	Age = 30,
 };
 
 var proxy = PocoTrackingProxyFactory.CreateProxyInstance(person, (p, propertyName) => {
