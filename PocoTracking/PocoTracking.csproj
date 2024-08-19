@@ -5,8 +5,27 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>Poco tracking proxy</Title>
-    <PackageId>PocoTrackingProxy</PackageId>
+    <PackageId>$(AssemblyName)</PackageId>
     <Product>PocoTrackingProxy</Product>
+    <Authors>$(Authors)</Authors>
+    <Description>Creates a proxy to any poco instance in order to attach a callback to be called every time a Poco property changes</Description>
+    <PackageProjectUrl>https://github.com/pixeledchimp/PocoTrackingProxy</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/pixeledchimp/PocoTrackingProxy</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
