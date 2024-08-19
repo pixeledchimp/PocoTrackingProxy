@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Reflection.Emit;
 
+using Proxy;
+
 namespace PocoTracking.Proxy
 {
     public static class PocoTrackingProxyFactory
@@ -41,10 +43,22 @@ namespace PocoTracking.Proxy
             var instanceField = proxyTypeBuilder.CreatePrivateInstanceField(proxyParentClass);
             var actionField = proxyTypeBuilder.CreatePrivateActionField(proxyParentClass);
 
+            proxyTypeBuilder.CreateGetInstanceMethod(proxyParentClass, instanceField);
+
             proxyTypeBuilder.CreateConstructor(proxyParentClass, instanceField, actionField);
             proxyTypeBuilder.DefineProxyProperties(proxyParentClass, instanceField, actionField);
 
             return proxyTypeBuilder.CreateType()!;
+        }
+
+        private static void CreateGetInstanceMethod(this TypeBuilder proxyTypeBuilder, Type proxyParentClass, FieldBuilder instanceField)
+        {
+            proxyTypeBuilder.AddInterfaceImplementation(typeof(IGetProxied<>).MakeGenericType(proxyParentClass));
+            var methodBuilder = proxyTypeBuilder.DefineMethod("GetProxiedInstance", MethodAttributes.Public | MethodAttributes.Virtual, proxyParentClass, Type.EmptyTypes);
+            var ilGenerator = methodBuilder.GetILGenerator();
+            ilGenerator.Emit(OpCodes.Ldarg_0);
+            ilGenerator.Emit(OpCodes.Ldfld, instanceField);
+            ilGenerator.Emit(OpCodes.Ret);
         }
 
         private static TypeBuilder CreateTypeBuilder(this ModuleBuilder moduleBuilder, string typeName, Type proxyParentClass)

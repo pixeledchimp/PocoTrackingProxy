@@ -1,4 +1,8 @@
+using FluentAssertions;
+
 using PocoTracking.Proxy;
+
+using Proxy;
 
 namespace PocoTrackingProxyFactoryTests
 {
@@ -24,15 +28,17 @@ namespace PocoTrackingProxyFactoryTests
             });
 
             // Assert
-            Assert.NotNull(proxy);
-            
-            Assert.False(trackingActionCalled);
+            proxy.Should().NotBeNull();
+            trackingActionCalled.Should().BeFalse();
 
             proxy.Name = "Test";
-            Assert.True(trackingActionCalled);
 
-            Assert.Equal("Test", proxy.Name);
-            Assert.Equal("Test", poco.Name);
+            trackingActionCalled.Should().BeTrue();
+
+            proxy.Name.Should().Be(poco.Name);
+
+            var proxiedPoco = (proxy as IGetProxied<Poco>)!.GetProxiedInstance();
+            proxiedPoco.Should().Be(poco);
         }
     }
 }
