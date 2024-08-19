@@ -1,8 +1,7 @@
 using FluentAssertions;
 
-using PocoTracking.Proxy;
+using PocoTracking;
 
-using Proxy;
 
 namespace PocoTrackingProxyFactoryTests
 {

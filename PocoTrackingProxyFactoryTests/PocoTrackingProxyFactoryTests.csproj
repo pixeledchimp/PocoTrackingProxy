@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proxy\Proxy.csproj" />
+    <ProjectReference Include="..\PocoTracking\PocoTracking.csproj" />
   </ItemGroup>
 
   <ItemGroup>

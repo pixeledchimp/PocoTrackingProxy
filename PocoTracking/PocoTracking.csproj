@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>Poco tracking proxy</Title>
+    <PackageId>PocoTrackingProxy</PackageId>
+    <Product>PocoTrackingProxy</Product>
   </PropertyGroup>
 
 </Project>

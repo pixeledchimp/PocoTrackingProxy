@@ -1,4 +1,4 @@
-﻿namespace Proxy
+﻿namespace PocoTracking
 {
     public interface IGetProxied<T> where T : new()
     {
