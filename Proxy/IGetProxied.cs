@@ -2,6 +2,10 @@
 {
     public interface IGetProxied<T> where T : new()
     {
-        T GetProxiedInstance();
+        /// <summary>
+        /// Returns the proxied object instance.
+        /// </summary>
+        /// <returns></returns>
+        T GetProxied();
     }
 }

@@ -54,7 +54,7 @@ namespace PocoTracking.Proxy
         private static void CreateGetInstanceMethod(this TypeBuilder proxyTypeBuilder, Type proxyParentClass, FieldBuilder instanceField)
         {
             proxyTypeBuilder.AddInterfaceImplementation(typeof(IGetProxied<>).MakeGenericType(proxyParentClass));
-            var methodBuilder = proxyTypeBuilder.DefineMethod("GetProxiedInstance", MethodAttributes.Public | MethodAttributes.Virtual, proxyParentClass, Type.EmptyTypes);
+            var methodBuilder = proxyTypeBuilder.DefineMethod("GetProxied", MethodAttributes.Public | MethodAttributes.Virtual, proxyParentClass, Type.EmptyTypes);
             var ilGenerator = methodBuilder.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_0);
             ilGenerator.Emit(OpCodes.Ldfld, instanceField);

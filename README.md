@@ -78,3 +78,21 @@ You can cache the proxy type and create instances of it later. This can be usefu
 ```csharp
 var _ = PocoTrackingProxyFactory.CreateProxyType<Person>();
 ```
+
+# IGetProxied<T>
+
+The proxy object implements the IGetProxied<T> interface, which allows you to get the proxied object from the proxy object.
+
+```csharp
+var person = new Person
+{
+	Name = "John",
+	Age = 30,
+};
+
+var proxy = person.CreateProxyInstance((p, propertyName) => {
+	Console.WriteLine($"Property {propertyName} changed to {p.GetType().GetProperty(propertyName).GetValue(p)}");
+});
+
+var proxiedPerson = (proxy as IGetProxied<Person>).GetProxied();
+```

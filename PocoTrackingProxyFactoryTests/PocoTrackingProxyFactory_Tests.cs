@@ -37,7 +37,7 @@ namespace PocoTrackingProxyFactoryTests
 
             proxy.Name.Should().Be(poco.Name);
 
-            var proxiedPoco = (proxy as IGetProxied<Poco>)!.GetProxiedInstance();
+            var proxiedPoco = (proxy as IGetProxied<Poco>)!.GetProxied();
             proxiedPoco.Should().Be(poco);
         }
     }
